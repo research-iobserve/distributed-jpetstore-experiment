@@ -19,7 +19,12 @@ rm -rf $ANALYSIS_DIR/*
 
 $COLLECTOR -d "$DATA_DIR" -p 9876 &
 
+## start docker
 
+## stop docker
+
+## terminate collector
+kill -TERM $COLLECTOR_ID
 
 "$KIEKER/trace-analysis.sh" -i "$DATA_DIR"/kieker-* --plot-Deployment-Component-Dependency-Graph --plot-Container-Dependency-Graph --plot-Assembly-Component-Dependency-Graph --plot-Aggregated-Deployment-Call-Tree -o analysis
 
