@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<repository:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.1" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.1" id="_zUW8gJk3Eeer_6_V0MXTNA" entityName="org.iobserve.distributedjpetstore">
+<repository:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2" id="_zUW8gJk3Eeer_6_V0MXTNA" entityName="org.iobserve.distributedjpetstore">
   <components__Repository xsi:type="repository:BasicComponent" id="_koqHoJk4Eeer_6_V0MXTNA" entityName="FrontendService">
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_DET9dZoYEeelXf12NKUrpA" entityName="IAccountService" requiredInterface__OperationRequiredRole="_X3ASt5k7Eeer_6_V0MXTNA"/>
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_JfjilZoYEeelXf12NKUrpA" entityName="IOrderService" requiredInterface__OperationRequiredRole="_g5z_2JoTEeelXf12NKUrpA"/>
@@ -35,7 +35,7 @@
     <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_2RSzdpoWEeelXf12NKUrpA" describedService__SEFF="_HG_aoJoWEeelXf12NKUrpA"/>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_66nsENqaEeeIEPEbplhj7g" entityName="AccountDatabase">
-    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_Q9V8YdqbEeeIEPEbplhj7g" entityName="Provided_IAccountService" providedInterface__OperationProvidedRole="_Cccex9qbEeeIEPEbplhj7g"/>
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_Q9V8YdqbEeeIEPEbplhj7g" entityName="Provided_IAccountDatabase" providedInterface__OperationProvidedRole="_Cccex9qbEeeIEPEbplhj7g"/>
     <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_ITf3E9quEeeIEPEbplhj7g" describedService__SEFF="_ggIwUNqlEeeIEPEbplhj7g"/>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_vuR_adquEeeIEPEbplhj7g" entityName="CatalogDatabase">
