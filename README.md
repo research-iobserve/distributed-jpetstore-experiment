@@ -28,9 +28,13 @@ complete command following the `# ` into a terminal.
 
 Compile first the workload runner:
 `# git clone https://github.com/research-iobserve/selenium-workloads.git
+
 `# cd selenium-workloads`
+
 `# git checkout jss-paper`
+
 `# ./gradlew build`
+
 `# cd ..`
 
 Compile and install iObserve:
