@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -v -f docker-compose.yml
+    kompose.version: 1.12.0 (0ab07be)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: catalog
+  name: catalog
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: catalog
+    spec:
+      containers:
+      - image: catalog
+        name: catalog
+        resources: {}
+      restartPolicy: Always
+status: {}
