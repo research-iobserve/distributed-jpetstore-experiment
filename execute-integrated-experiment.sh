@@ -31,6 +31,29 @@ if [ ! -f "$WORKLOAD_CONFIGURATION" ] ; then
 	exit 1
 fi
 
+# check for directories
+if [ ! -d $DATA_DIR ] ; then
+	echo "Data directory $DATA_DIR does not exist"
+	exit 1
+fi
+if [ ! -d $DB_DIR ] ; then
+	echo "Database directory $DB_DIR does not exist"
+	exit 1
+fi
+if [ ! -d $RESULT_DIR ] ; then
+	echo "Result directory $RESULT_DIR does not exist"
+	exit 1
+fi
+if [ ! -d $FIXED_DIR ] ; then
+	echo "Fixed data directory $FIXED_DIR does not exist"
+	exit 1
+fi
+if [ ! -d $PCM_DIR ] ; then
+	echo "PCM directory $PCM_DIR does not exist"
+	exit 1
+fi
+
+
 #############################################
 # check if no leftovers are running
 
