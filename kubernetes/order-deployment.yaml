@@ -18,7 +18,7 @@ spec:
         io.kompose.service: order
     spec:
       containers:
-      - image: order
+      - image: blade1.se.internal:5000/jpetstore-order-service
         name: order
         resources: {}
       restartPolicy: Always

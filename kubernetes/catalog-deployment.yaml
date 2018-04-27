@@ -18,7 +18,7 @@ spec:
         io.kompose.service: catalog
     spec:
       containers:
-      - image: catalog
+      - image: blade1.se.internal:5000/jpetstore-catalog-service
         name: catalog
         resources: {}
       restartPolicy: Always

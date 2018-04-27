@@ -18,7 +18,7 @@ spec:
         io.kompose.service: frontend
     spec:
       containers:
-      - image: frontend
+      - image: blade1.se.internal:5000/rju/jpetstore-frontend-service
         name: frontend
         ports:
         - containerPort: 8080
