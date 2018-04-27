@@ -1,6 +1,6 @@
 # Kubernetes Setup
 
-Start Kubernetes
+## Start Kubernetes
 - `kubectl create -f account-deployment.yaml`
    deployment "account" created
 - `kubectl create -f order-deployment.yaml`
@@ -10,7 +10,20 @@ Start Kubernetes
 - `kubectl create -f frontend-deployment.yaml`
    deployment "frontend" created
 
-Check if they are up and running:
+## Important commands
+- `kubectl get deployments` lists all deployments
+- `kubectl describe deployments` lists all deployments in great detail
+- `kubectl describe deployment DEPLOYMENT_NAME` shows only the details for one deployment
+
+- `kubectl get pods` list all pods. There is usually one pod for each deployment
+   in this setup.
+- `kubectl describe pods` lists all pods in great detail
+- `kubectl describe pod POD_NAME` shows only the details of the specified pod
+
+- `kubectl delete pods/POD_NAME` delete a pod
+- `kubectl delete deployment/DEPLOYMENT_NAME` delete a deployment
+
+## Check if they are up and running
 - `kubectl get deployments`
    Potential output
 ```
@@ -32,7 +45,15 @@ kuard                       1/1       Running            0          8d
 order-6c5fbb96f5-rq6dv      0/1       ImagePullBackOff   0          2m
 ```
 - This shows that they cannot get an image loaded. Note that the id part of the
-  name may be different.
+  name may be different. See below for an analysis approach in *inspect deployment and pods*
+```
+NAME                        READY     STATUS              RESTARTS   AGE
+account-5f74bd46b5-54xt8    0/1       ContainerCreating   0          28s
+```
+- *ContainerCreating* indicates that the Container is being created. Wait
+  some time. It might switch to *Running*. If not, see *Inspect deployments and pods*.
+
+## Inspect deployments and pods
 - Use `kubectl describe pods/account-85f7bf47f4-q4ldg` to get more info on the
   issue
 ```
@@ -89,4 +110,6 @@ Events:
 - As you can see the image account could not be found. This is usually the case
   as the image is named `jpetstore-account-service` locally and in the repository
   `blade1.se.internal:5000/jpetstore-account-service`
+
+
 
