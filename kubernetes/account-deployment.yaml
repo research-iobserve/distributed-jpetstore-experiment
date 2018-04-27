@@ -18,7 +18,7 @@ spec:
         io.kompose.service: account
     spec:
       containers:
-      - image: account
+      - image: blade1.se.internal:5000/jpetstore-account-service
         name: account
         resources: {}
       restartPolicy: Always
