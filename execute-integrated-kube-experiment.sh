@@ -90,7 +90,8 @@ for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yam
 	kubectl create -f $KUBERNETES_DIR/$I
 done
 
-FRONTEND=`kubectl describe pods/frontend | grep "IP:" | awk '{ print $2 }'`
+ID=`kubectl get pods | grep frontend | awk '{ print $1 }'`
+FRONTEND=`kubectl describe pods/$ID | grep "IP:" | awk '{ print $2 }'`
 
 SERVICE_URL="http://$FRONTEND:8080/jpetstore-frontend"
 
