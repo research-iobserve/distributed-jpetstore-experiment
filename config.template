@@ -13,6 +13,9 @@ RESULT_DIR="$BASE_DIR/results"
 # docker repositoriy
 DOCKER_REPO="blade1.se.internal:5000"
 
+# logger IP
+LOGGER=192.168.48.30
+
 ##############
 ## executables
 

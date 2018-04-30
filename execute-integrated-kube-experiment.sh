@@ -94,8 +94,11 @@ sleep 10
 echo ">>>>>>>>>>> start jpetstore"
 
 for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yaml order-deployment.yaml ; do
-	kubectl create -f $KUBERNETES_DIR/$I
+        cat $KUBERNETES_DIR/$I | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
+	kubectl create -f start.yaml
 done
+
+rm start.yaml
 
 FRONTEND=""
 while [ "$FRONTEND" == "" ] ; do
@@ -136,7 +139,7 @@ killall -9 phantomjs
 # shutdown jpetstore
 echo "<<<<<<<<<<< term jpetstore"
 
-for I in frontend account catalog order ; do
+for I in account catalog order frontend ; do
 	kubectl delete deployments/$I
 done
 

@@ -35,8 +35,12 @@ checkDirectory "PCM" $PCM_DIR
 #############################################
 # check if no leftovers are running
 
-# check all kubernetes services of the experiment are terminated
+# stop collector
+COLLECTOR_PID=`ps auxw | grep coll | awk '{ print $2 }'`
+kill -TERM $COLLECTOR_PID
 
+# remove old data
+rm -rf $DATA_DIR/*
 
 # killall phantomjs from selenium
 killall -9 phantomjs
