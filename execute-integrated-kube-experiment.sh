@@ -35,6 +35,13 @@ checkDirectory "Kubernetes" $KUBERNETES_DIR
 #############################################
 # check if no leftovers are running
 
+# stop collector
+COLLECTOR_PID=`ps auxw | grep coll | awk '{ print $2 }'`
+kill -TERM $COLLECTOR_PID
+
+# remove old data
+rm -rf $DATA_DIR/*
+
 # check all kubernetes services of the experiment are terminated
 for I in frontend account catalog order ; do
 	kubectl delete deployments/$I
