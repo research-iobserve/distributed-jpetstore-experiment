@@ -52,13 +52,18 @@ if [ ! -d $PCM_DIR ] ; then
 	echo "PCM directory $PCM_DIR does not exist"
 	exit 1
 fi
-
+if [ ! -d $KUBERNETES_DIR ] ; then
+	echo "Kubernetes directory $KUBERNETES_DIR does not exist"
+	exit 1
+fi
 
 #############################################
 # check if no leftovers are running
 
 # check all kubernetes services of the experiment are terminated
-
+for I in `frontend account catalog order` ; do
+	kubectl delete deployments/$I
+done
 
 # killall phantomjs from selenium
 killall -9 phantomjs
