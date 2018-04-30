@@ -106,15 +106,11 @@ sleep 10
 
 echo ">>>>>>>>>>> start jpetstore"
 
-docker network create --driver bridge jpetstore-net
+for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yaml order-deployment.yaml ; do
+	kubectl create -f $KUBERNETES_DIR/$I
+done
 
-docker run -e LOGGER=$LOGGER -d --name account --network=jpetstore-net jpetstore-account-service
-docker run -e LOGGER=$LOGGER -d --name order --network=jpetstore-net jpetstore-order-service
-docker run -e LOGGER=$LOGGER -d --name catalog --network=jpetstore-net jpetstore-catalog-service
-docker run -e LOGGER=$LOGGER -d --name frontend --network=jpetstore-net jpetstore-frontend-service
-
-ID=`docker ps | grep 'frontend' | awk '{ print $1 }'`
-FRONTEND=`docker inspect $ID | grep '"IPAddress' | awk '{ print $2 }' | tail -1 | sed 's/^"\(.*\)",/\1/g'`
+FRONTEND=`kubectl describe pods/frontend | grep "IP:" | awk '{ print $2 }'`
 
 SERVICE_URL="http://$FRONTEND:8080/jpetstore-frontend"
 
@@ -134,10 +130,10 @@ sleep 30
 
 echo "Migrating service"
 
-docker run -e LOGGER=$LOGGER -d --name account-usa jpetstore-usa-account-service
-docker rename account account-germany
-docker rename account-usa account
-docker stop account-germany
+#docker run -e LOGGER=$LOGGER -d --name account-usa jpetstore-usa-account-service
+#docker rename account account-germany
+#docker rename account-usa account
+#docker stop account-germany
 
 wait $WORKLOAD_RUNNER_PID
 
