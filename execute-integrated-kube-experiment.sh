@@ -145,18 +145,9 @@ killall -9 phantomjs
 # shutdown jpetstore
 echo "<<<<<<<<<<< term jpetstore"
 
-docker network rm jpetstore-net
-
-docker stop frontend
-docker stop order
-docker stop catalog
-docker stop account
-
-docker rm frontend
-docker rm order
-docker rm catalog
-docker rm account
-docker rm account-germany
+for I in `frontend account catalog order` ; do
+	kubectl delete deployments/$I
+done
 
 # shutdown analysis/collector
 echo "<<<<<<<<<<< term analysis"
