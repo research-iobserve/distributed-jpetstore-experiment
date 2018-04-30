@@ -105,7 +105,7 @@ done
 echo ">>>>>>>>>>> start workload"
 
 export SELENIUM_EXPERIMENT_WORKLOADS_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
-$WORKLOAD_RUNNER -c $WORKLOAD_CONFIGURATION -u "$SERVICE_URL" &
+$WORKLOAD_RUNNER -c $WORKLOAD_CONFIGURATION -u "$SERVICE_URL" -d "$PHANTOM_JS" &
 WORKLOAD_RUNNER_PID=$!
 
 sleep 30
