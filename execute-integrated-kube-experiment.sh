@@ -36,7 +36,7 @@ checkDirectory "Kubernetes" $KUBERNETES_DIR
 # check if no leftovers are running
 
 # check all kubernetes services of the experiment are terminated
-for I in `frontend account catalog order` ; do
+for I in frontend account catalog order ; do
 	kubectl delete deployments/$I
 done
 
@@ -129,7 +129,7 @@ killall -9 phantomjs
 # shutdown jpetstore
 echo "<<<<<<<<<<< term jpetstore"
 
-for I in `frontend account catalog order` ; do
+for I in frontend account catalog order ; do
 	kubectl delete deployments/$I
 done
 
