@@ -93,12 +93,12 @@ echo ">>>>>>>>>>> start analysis/collector"
 
 echo ">>>>>>>>>>> start jpetstore"
 
-for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yaml order-deployment.yaml frontend-service.yaml ; do
-        cat $KUBERNETES_DIR/$I | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
-	kubectl create -f start.yaml
-done
-#cat $KUBERNETES_DIR/jpetstore.yamle | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
-#kubectl create -f start.yaml
+#for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yaml order-deployment.yaml frontend-service.yaml ; do
+#        cat $KUBERNETES_DIR/$I | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
+#	kubectl create -f start.yaml
+#done
+cat $KUBERNETES_DIR/jpetstore.yaml | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
+kubectl create -f start.yaml
 
 #rm start.yaml
 
