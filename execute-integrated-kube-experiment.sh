@@ -93,12 +93,16 @@ sleep 10
 
 echo ">>>>>>>>>>> start jpetstore"
 
-for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yaml order-deployment.yaml ; do
-        cat $KUBERNETES_DIR/$I | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
-	kubectl create -f start.yaml
-done
+#for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yaml order-deployment.yaml ; do
+#        cat $KUBERNETES_DIR/$I | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
+#	kubectl create -f start.yaml
+#done
+cat $KUBERNETES_DIR/jpetstore.yamle | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
+kubectl create -f start.yaml
 
-rm start.yaml
+#rm start.yaml
+
+exit 0
 
 FRONTEND=""
 while [ "$FRONTEND" == "" ] ; do
