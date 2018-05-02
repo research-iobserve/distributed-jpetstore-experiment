@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: account
+  name: account
+spec:
+  hostname: account
+  subdomain: jpetstore
+  containers:
+  - image: blade1.se.internal:5000/jpetstore-usa-account-service
+    name: account
+    resources: {}
+    env:
+    - name: LOGGER
+      value: %LOGGER%
+
