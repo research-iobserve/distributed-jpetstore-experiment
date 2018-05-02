@@ -80,5 +80,7 @@ spec:
     env:
     - name: LOGGER
       value: %LOGGER%
+    - name: JPETSTORE_DOMAIN
+      value: ".jpetstore"
     restartPolicy: Always
 
