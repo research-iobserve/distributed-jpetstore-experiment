@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -v convert
+    kompose.version: 1.12.0 (0ab07be)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: account
+  name: account
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: account
+    spec:
+      containers:
+      - env:
+        - name: LOGGER
+          value: "%LOGGER%"
+        image: blade1.se.internal:5000/jpetstore-account-service
+        name: account
+        resources: {}
+      restartPolicy: Always
+status: {}
