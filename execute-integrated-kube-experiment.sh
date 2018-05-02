@@ -43,8 +43,9 @@ kill -TERM $COLLECTOR_PID
 rm -rf $DATA_DIR/*
 
 # check all kubernetes services of the experiment are terminated
+kubectl delete service/jpetstore
 for I in frontend account catalog order ; do
-	kubectl delete deployments/$I
+	kubectl delete pods/$I
 done
 
 # killall phantomjs from selenium
@@ -83,11 +84,11 @@ EOF
 
 echo ">>>>>>>>>>> start analysis/collector"
 
-#export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
-#$COLLECTOR -c collector.config &
-#COLLECTOR_PID=$!
+export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
+$COLLECTOR -c collector.config &
+COLLECTOR_PID=$!
 
-#sleep 10
+sleep 10
 
 # jpetstore
 
@@ -98,11 +99,10 @@ echo ">>>>>>>>>>> start jpetstore"
 #	kubectl create -f start.yaml
 #done
 cat $KUBERNETES_DIR/jpetstore.yaml | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
+cat $KUBERNETES_DIR/usa.yaml | sed "s/%LOGGER%/$LOGGER/g" > additional.yaml
 kubectl create -f start.yaml
 
-#rm start.yaml
-
-exit 0
+rm start.yaml
 
 FRONTEND=""
 while [ "$FRONTEND" == "" ] ; do
@@ -128,6 +128,8 @@ sleep 30
 
 echo "Migrating service"
 
+kubectl delete --grace-period=60 pods/account
+kubectl create -f additional.yaml
 #docker run -e LOGGER=$LOGGER -d --name account-usa jpetstore-usa-account-service
 #docker rename account account-germany
 #docker rename account-usa account
@@ -143,9 +145,15 @@ killall -9 phantomjs
 # shutdown jpetstore
 echo "<<<<<<<<<<< term jpetstore"
 
-for I in account catalog order frontend ; do
-	kubectl delete deployments/$I
+#for I in account catalog order frontend ; do
+#	kubectl delete deployments/$I
+#done
+kubectl delete service/jpetstore
+for I in frontend account usa-account catalog order ; do
+	kubectl delete --grace-period=60 pods/$I
 done
+
+sleep 120
 
 # shutdown analysis/collector
 echo "<<<<<<<<<<< term analysis"
