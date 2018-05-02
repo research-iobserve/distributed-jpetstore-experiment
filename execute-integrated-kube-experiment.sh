@@ -83,22 +83,22 @@ EOF
 
 echo ">>>>>>>>>>> start analysis/collector"
 
-export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
-$COLLECTOR -c collector.config &
-COLLECTOR_PID=$!
+#export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
+#$COLLECTOR -c collector.config &
+#COLLECTOR_PID=$!
 
-sleep 10
+#sleep 10
 
 # jpetstore
 
 echo ">>>>>>>>>>> start jpetstore"
 
-#for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yaml order-deployment.yaml ; do
-#        cat $KUBERNETES_DIR/$I | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
-#	kubectl create -f start.yaml
-#done
-cat $KUBERNETES_DIR/jpetstore.yamle | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
-kubectl create -f start.yaml
+for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yaml order-deployment.yaml frontend-service.yaml ; do
+        cat $KUBERNETES_DIR/$I | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
+	kubectl create -f start.yaml
+done
+#cat $KUBERNETES_DIR/jpetstore.yamle | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
+#kubectl create -f start.yaml
 
 #rm start.yaml
 
