@@ -26,7 +26,6 @@ spec:
     env:
     - name: LOGGER
       value: %LOGGER%
-    restartPolicy: Always
 ---
 apiVersion: v1
 kind: Pod
@@ -44,7 +43,6 @@ spec:
     env:
     - name: LOGGER
       value: %LOGGER%
-    restartPolicy: Always
 ---
 apiVersion: v1
 kind: Pod
@@ -62,7 +60,6 @@ spec:
     env:
     - name: LOGGER
       value: %LOGGER%
-    restartPolicy: Always
 ---
 apiVersion: v1
 kind: Pod
@@ -82,5 +79,4 @@ spec:
       value: %LOGGER%
     - name: JPETSTORE_DOMAIN
       value: ".jpetstore"
-    restartPolicy: Always
 
