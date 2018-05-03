@@ -84,7 +84,7 @@ EOF
 
 echo ">>>>>>>>>>> start analysis/collector"
 
-export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
+#export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
 $COLLECTOR -c collector.config &
 COLLECTOR_PID=$!
 
@@ -124,7 +124,7 @@ sleep 30
 
 echo "Migrating service"
 
-kubectl replace -f additional.yaml
+kubectl replace -f additional.yaml --force
 
 wait $WORKLOAD_RUNNER_PID
 
@@ -136,9 +136,9 @@ killall -9 phantomjs
 # shutdown jpetstore
 echo "<<<<<<<<<<< term jpetstore"
 
-kubectl delete service/jpetstore
+kubectl delete --grace-period=60 service/jpetstore
 for I in frontend account catalog order ; do
-	kubectl delete --grace-period=60 pods/$I
+	kubectl delete --grace-period=120 pods/$I
 done
 
 sleep 120
@@ -151,4 +151,3 @@ rm collector.config
 
 echo "Done."
 # end
-
