@@ -94,10 +94,6 @@ sleep 10
 
 echo ">>>>>>>>>>> start jpetstore"
 
-#for I in account-deployment.yaml catalog-deployment.yaml frontend-deployment.yaml order-deployment.yaml frontend-service.yaml ; do
-#        cat $KUBERNETES_DIR/$I | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
-#	kubectl create -f start.yaml
-#done
 cat $KUBERNETES_DIR/jpetstore.yaml | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
 cat $KUBERNETES_DIR/usa.yaml | sed "s/%LOGGER%/$LOGGER/g" > additional.yaml
 kubectl create -f start.yaml
@@ -128,12 +124,7 @@ sleep 30
 
 echo "Migrating service"
 
-kubectl delete --grace-period=60 pods/account
-kubectl create -f additional.yaml
-#docker run -e LOGGER=$LOGGER -d --name account-usa jpetstore-usa-account-service
-#docker rename account account-germany
-#docker rename account-usa account
-#docker stop account-germany
+kubectl replace -f additional.yaml
 
 wait $WORKLOAD_RUNNER_PID
 
@@ -145,11 +136,8 @@ killall -9 phantomjs
 # shutdown jpetstore
 echo "<<<<<<<<<<< term jpetstore"
 
-#for I in account catalog order frontend ; do
-#	kubectl delete deployments/$I
-#done
 kubectl delete service/jpetstore
-for I in frontend account usa-account catalog order ; do
+for I in frontend account catalog order ; do
 	kubectl delete --grace-period=60 pods/$I
 done
 
