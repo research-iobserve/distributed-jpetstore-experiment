@@ -64,7 +64,7 @@
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_Maf1WJlKEeer_6_V0MXTNA" entityName="ICatalogService">
     <signatures__OperationInterface id="_vBvEMJlMEeer_6_V0MXTNA" entityName="getCategoryList" returnType__OperationSignature="_NwzSPJlQEeer_6_V0MXTNA"/>
-    <signatures__OperationInterface id="_5ZneAJlMEeer_6_V0MXTNA" entityName="getCategoryByID" returnType__OperationSignature="_8gSMoJlPEeer_6_V0MXTNA">
+    <signatures__OperationInterface id="_5ZneAJlMEeer_6_V0MXTNA" entityName="getCategoryById" returnType__OperationSignature="_8gSMoJlPEeer_6_V0MXTNA">
       <parameters__OperationSignature parameterName="id" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
@@ -102,21 +102,21 @@
     </signatures__OperationInterface>
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_g5z_2JoTEeelXf12NKUrpA" entityName="IOrderService">
-    <signatures__OperationInterface id="_m1eF8JoTEeelXf12NKUrpA" entityName="InsertOrder">
+    <signatures__OperationInterface id="_m1eF8JoTEeelXf12NKUrpA" entityName="insertOrder">
       <parameters__OperationSignature dataType__Parameter="_zeG-TZoPEeelXf12NKUrpA" parameterName="order" modifier__Parameter="in"/>
     </signatures__OperationInterface>
-    <signatures__OperationInterface id="_qa5fEJoUEeelXf12NKUrpA" entityName="NextId">
+    <signatures__OperationInterface id="_qa5fEJoUEeelXf12NKUrpA" entityName="nextId">
       <parameters__OperationSignature parameterName="name" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
       <returnType__OperationSignature xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
     </signatures__OperationInterface>
-    <signatures__OperationInterface id="__7-a4JoUEeelXf12NKUrpA" entityName="OrderById" returnType__OperationSignature="_zeG-TZoPEeelXf12NKUrpA">
+    <signatures__OperationInterface id="__7-a4JoUEeelXf12NKUrpA" entityName="orderById" returnType__OperationSignature="_zeG-TZoPEeelXf12NKUrpA">
       <parameters__OperationSignature parameterName="orderId" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
-    <signatures__OperationInterface id="_HG_aoJoWEeelXf12NKUrpA" entityName="OrdersByUsername" returnType__OperationSignature="_CxTz3JoWEeelXf12NKUrpA">
+    <signatures__OperationInterface id="_HG_aoJoWEeelXf12NKUrpA" entityName="ordersByUsername" returnType__OperationSignature="_CxTz3JoWEeelXf12NKUrpA">
       <parameters__OperationSignature parameterName="username" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
