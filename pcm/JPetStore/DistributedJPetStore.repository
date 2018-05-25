@@ -48,16 +48,16 @@
   </components__Repository>
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_X3ASt5k7Eeer_6_V0MXTNA" entityName="IAccountService">
     <signatures__OperationInterface id="_bt2ocJk7Eeer_6_V0MXTNA" entityName="insertAccount">
-      <parameters__OperationSignature dataType__Parameter="_E1nf7ZlQEeer_6_V0MXTNA" parameterName="account"/>
+      <parameters__OperationSignature dataType__Parameter="_E1nf7ZlQEeer_6_V0MXTNA" parameterName="account" modifier__Parameter="in"/>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_fDROoJlHEeer_6_V0MXTNA" entityName="updateAccount">
-      <parameters__OperationSignature dataType__Parameter="_E1nf7ZlQEeer_6_V0MXTNA" parameterName="account"/>
+      <parameters__OperationSignature dataType__Parameter="_E1nf7ZlQEeer_6_V0MXTNA" parameterName="account" modifier__Parameter="in"/>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_48h2MJlIEeer_6_V0MXTNA" entityName="userRequest" returnType__OperationSignature="_E1nf7ZlQEeer_6_V0MXTNA">
-      <parameters__OperationSignature parameterName="username">
+      <parameters__OperationSignature parameterName="username" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
-      <parameters__OperationSignature parameterName="password">
+      <parameters__OperationSignature parameterName="password" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
@@ -65,66 +65,66 @@
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_Maf1WJlKEeer_6_V0MXTNA" entityName="ICatalogService">
     <signatures__OperationInterface id="_vBvEMJlMEeer_6_V0MXTNA" entityName="getCategoryList" returnType__OperationSignature="_NwzSPJlQEeer_6_V0MXTNA"/>
     <signatures__OperationInterface id="_5ZneAJlMEeer_6_V0MXTNA" entityName="getCategoryByID" returnType__OperationSignature="_8gSMoJlPEeer_6_V0MXTNA">
-      <parameters__OperationSignature parameterName="id">
+      <parameters__OperationSignature parameterName="id" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_X9jsAJlOEeer_6_V0MXTNA" entityName="itemInStock">
-      <parameters__OperationSignature parameterName="id">
+      <parameters__OperationSignature parameterName="id" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
       <returnType__OperationSignature xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.2"/>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_3ULwoJlOEeer_6_V0MXTNA" entityName="itemListByProduct" returnType__OperationSignature="_eS5ynJlQEeer_6_V0MXTNA">
-      <parameters__OperationSignature parameterName="productId">
+      <parameters__OperationSignature parameterName="productId" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_tz-JMJlPEeer_6_V0MXTNA" entityName="itemById" returnType__OperationSignature="_c97jvZlQEeer_6_V0MXTNA">
-      <parameters__OperationSignature parameterName="itemId">
+      <parameters__OperationSignature parameterName="itemId" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_7r00YJlQEeer_6_V0MXTNA" entityName="productListByCategory" returnType__OperationSignature="_LOQnjJlREeer_6_V0MXTNA">
-      <parameters__OperationSignature parameterName="categoryId">
+      <parameters__OperationSignature parameterName="categoryId" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_XKVX8JlREeer_6_V0MXTNA" entityName="productById" returnType__OperationSignature="_HgqUbZlREeer_6_V0MXTNA">
-      <parameters__OperationSignature parameterName="productId">
+      <parameters__OperationSignature parameterName="productId" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_hH-FwJlREeer_6_V0MXTNA" entityName="searchProductList" returnType__OperationSignature="_LOQnjJlREeer_6_V0MXTNA">
-      <parameters__OperationSignature parameterName="keywords">
+      <parameters__OperationSignature parameterName="keywords" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_g5z_2JoTEeelXf12NKUrpA" entityName="IOrderService">
     <signatures__OperationInterface id="_m1eF8JoTEeelXf12NKUrpA" entityName="InsertOrder">
-      <parameters__OperationSignature dataType__Parameter="_zeG-TZoPEeelXf12NKUrpA" parameterName="order"/>
+      <parameters__OperationSignature dataType__Parameter="_zeG-TZoPEeelXf12NKUrpA" parameterName="order" modifier__Parameter="in"/>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_qa5fEJoUEeelXf12NKUrpA" entityName="NextId">
-      <parameters__OperationSignature parameterName="name">
+      <parameters__OperationSignature parameterName="name" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
       <returnType__OperationSignature xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="__7-a4JoUEeelXf12NKUrpA" entityName="OrderById" returnType__OperationSignature="_zeG-TZoPEeelXf12NKUrpA">
-      <parameters__OperationSignature parameterName="orderId">
+      <parameters__OperationSignature parameterName="orderId" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
     <signatures__OperationInterface id="_HG_aoJoWEeelXf12NKUrpA" entityName="OrdersByUsername" returnType__OperationSignature="_CxTz3JoWEeelXf12NKUrpA">
-      <parameters__OperationSignature parameterName="username">
+      <parameters__OperationSignature parameterName="username" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
     </signatures__OperationInterface>
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_Cccex9qbEeeIEPEbplhj7g" entityName="IAccountDatabase">
     <signatures__OperationInterface id="_ggIwUNqlEeeIEPEbplhj7g" entityName="applySQLStatement">
-      <parameters__OperationSignature parameterName="sqlStatement">
+      <parameters__OperationSignature parameterName="sqlStatement" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
       <returnType__OperationSignature xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
@@ -132,7 +132,7 @@
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_aex7yNquEeeIEPEbplhj7g" entityName="ICatalogDatabase">
     <signatures__OperationInterface id="_gZ85sNquEeeIEPEbplhj7g" entityName="applySQLStatement">
-      <parameters__OperationSignature parameterName="sqlStatement">
+      <parameters__OperationSignature parameterName="sqlStatement" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
       <returnType__OperationSignature xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
@@ -140,7 +140,7 @@
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_mgSl2NquEeeIEPEbplhj7g" entityName="IOrderDatabase">
     <signatures__OperationInterface id="_qL-NYNquEeeIEPEbplhj7g" entityName="applySQLStatement">
-      <parameters__OperationSignature parameterName="sqlStatement">
+      <parameters__OperationSignature parameterName="sqlStatement" modifier__Parameter="in">
         <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
       </parameters__OperationSignature>
       <returnType__OperationSignature xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>

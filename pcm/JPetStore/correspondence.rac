@@ -11,7 +11,7 @@
     <entries xsi:type="correspondence:AssemblyEntry" implementationId="JPetStore-Catalog">
       <assembly href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/Assembly.system#_dK2EEAA3EeiMaMdqfMnouQ"/>
     </entries>
-    <entries xsi:type="correspondence:AssemblyEntry">
+    <entries xsi:type="correspondence:AssemblyEntry" implementationId="JPetStore-Order">
       <assembly href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/Assembly.system#_d_PVcAA3EeiMaMdqfMnouQ"/>
     </entries>
     <entries xsi:type="correspondence:AssemblyEntry" implementationId="Database-Account">
