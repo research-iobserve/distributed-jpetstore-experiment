@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="ASCII"?>
 <privacy:PrivacyModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacy="https://www.iobserve-devops.net/model/0.0.3/privacy">
-  <resourceContainerLocations isocode="GERMANY">
+  <resourceContainerLocations xsi:type="privacy:GeoLocation" isocode="GERMANY">
     <resourceContainer href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/ResourceEnvironment.resourceenvironment#_q2Ev4AA1EeiMaMdqfMnouQ"/>
   </resourceContainerLocations>
-  <resourceContainerLocations>
+  <resourceContainerLocations xsi:type="privacy:GeoLocation" isocode="USA">
     <resourceContainer href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/ResourceEnvironment.resourceenvironment#_rohggAA1EeiMaMdqfMnouQ"/>
   </resourceContainerLocations>
-  <resourceContainerLocations isocode="GERMANY">
+  <resourceContainerLocations xsi:type="privacy:GeoLocation" isocode="GERMANY">
     <resourceContainer href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/ResourceEnvironment.resourceenvironment#_r_sDUAA1EeiMaMdqfMnouQ"/>
   </resourceContainerLocations>
-  <resourceContainerLocations isocode="GERMANY">
+  <resourceContainerLocations xsi:type="privacy:GeoLocation" isocode="GERMANY">
     <resourceContainer href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/ResourceEnvironment.resourceenvironment#_sThlUAA1EeiMaMdqfMnouQ"/>
   </resourceContainerLocations>
-  <resourceContainerLocations isocode="GERMANY">
+  <resourceContainerLocations xsi:type="privacy:GeoLocation" isocode="GERMANY">
     <resourceContainer href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/ResourceEnvironment.resourceenvironment#_slzBEAA1EeiMaMdqfMnouQ"/>
   </resourceContainerLocations>
   <privacyLevels xsi:type="privacy:ParameterPrivacy" level="PERSONAL">
