@@ -15,6 +15,27 @@
   <resourceContainerLocations xsi:type="privacy:GeoLocation" isocode="GERMANY">
     <resourceContainer href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/ResourceEnvironment.resourceenvironment#_slzBEAA1EeiMaMdqfMnouQ"/>
   </resourceContainerLocations>
+  <encapsulatedDataSources xsi:type="privacy:EncapsulatedDataSource" dataSource="false">
+    <component href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/DistributedJPetStore.repository#_koqHoJk4Eeer_6_V0MXTNA"/>
+  </encapsulatedDataSources>
+  <encapsulatedDataSources xsi:type="privacy:EncapsulatedDataSource" dataSource="false">
+    <component href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/DistributedJPetStore.repository#_ZpyJ0Jk5Eeer_6_V0MXTNA"/>
+  </encapsulatedDataSources>
+  <encapsulatedDataSources xsi:type="privacy:EncapsulatedDataSource" dataSource="false">
+    <component href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/DistributedJPetStore.repository#_b7wzgJk5Eeer_6_V0MXTNA"/>
+  </encapsulatedDataSources>
+  <encapsulatedDataSources xsi:type="privacy:EncapsulatedDataSource" dataSource="false">
+    <component href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/DistributedJPetStore.repository#_lsiKAJk5Eeer_6_V0MXTNA"/>
+  </encapsulatedDataSources>
+  <encapsulatedDataSources xsi:type="privacy:EncapsulatedDataSource" dataSource="true">
+    <component href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/DistributedJPetStore.repository#_66nsENqaEeeIEPEbplhj7g"/>
+  </encapsulatedDataSources>
+  <encapsulatedDataSources xsi:type="privacy:EncapsulatedDataSource" dataSource="true">
+    <component href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/DistributedJPetStore.repository#_vuR_adquEeeIEPEbplhj7g"/>
+  </encapsulatedDataSources>
+  <encapsulatedDataSources xsi:type="privacy:EncapsulatedDataSource" dataSource="true">
+    <component href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/DistributedJPetStore.repository#_67vydquEeeIEPEbplhj7g"/>
+  </encapsulatedDataSources>
   <privacyLevels xsi:type="privacy:ParameterPrivacy" level="PERSONAL">
     <parameter href="Projects/iObserve/experiments/distributed-jpetstore-experiment/pcm/JPetStore/DistributedJPetStore.repository#//@interfaces__Repository.0/@signatures__OperationInterface.0/@parameters__OperationSignature.0"/>
   </privacyLevels>
