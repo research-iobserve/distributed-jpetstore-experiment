@@ -35,6 +35,18 @@ checkDirectory "PCM" $PCM_DIR
 #############################################
 # check if no leftovers are running
 
+# clear docker
+docker stop frontend
+docker stop order
+docker stop catalog
+docker stop account
+
+docker rm frontend
+docker rm order
+docker rm catalog
+docker rm account
+docker rm account-germany
+
 # stop collector
 COLLECTOR_PID=`ps auxw | grep coll | awk '{ print $2 }'`
 kill -TERM $COLLECTOR_PID
