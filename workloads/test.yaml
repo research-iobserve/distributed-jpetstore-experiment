@@ -1,0 +1,56 @@
+# Example configuration
+---
+activityDelay: 1
+webDriverConfiguration:
+  baseUrl: http://172.18.0.5:8080/jpetstore-frontend/
+  type: org.iobserve.selenium.driver.HtmlUnitDriverFactory
+  driver: /home/reiner/Projects/iObserve/experiments/tools/geckodriver
+  timeout: 60000
+workloads:
+  - name: CatToCartBehavior
+    intensity:
+      type: org.iobserve.selenium.configuration.ConstantWorkloadIntensity
+      name: CatToCartBehavior
+      spawnPerSecond: 1
+      durations: [ 1 ]
+behaviors:
+  BrowsingUser:
+    name: BrowsingUser
+    activityDelay: 2
+    subbehaviors:
+      - name: ViewProductTask
+        repetition: { min: 1, max: 1 }
+        parameters:
+          category: CATS
+      - name: ViewProductTask
+        repetition: { min: 1, max: 1 }
+        parameters:
+          category: FISH
+  CatToCartBehavior:
+    name: CatToCartBehavior
+    subbehaviors:
+      - name: AddItemsToCartTask
+        repetition: { min: 1, max: 1 }
+        parameters:
+          amount: 9
+          item: FL-DSH-01
+          category: CATS
+  NewCustomerBehavior:
+    name: NewCustomerBehavior
+    subbehaviors:
+      - name: CreateNewCustomerTask
+        parameters:
+          username: Newone
+          password: new
+      - name: AddItemsToCartTask
+        repetition: { min: 1, max: 1 }
+        parameters:
+          amount: 1
+          item: RP-SN-01
+          category: REPTILES
+      - name: LoginJPetStoreTask
+        parameters:
+          username: Newone
+          password: new
+      - name: CheckoutJPetStoreTask
+

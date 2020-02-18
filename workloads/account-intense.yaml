@@ -1,0 +1,135 @@
+# Example configuration
+---
+activityDelay: 1
+webDriverConfiguration:
+  baseUrl: http://172.18.0.5:8080/jpetstore-frontend/
+  type: org.iobserve.selenium.driver.HtmlUnitDriverFactory
+  driver: /home/reiner/Projects/iObserve/experiments/tools/geckodriver
+  timeout: 60000
+workloads:
+  - name: AccountManager
+    intensity:
+      type: org.iobserve.selenium.configuration.ConstantWorkloadIntensity
+      name: AccountManager
+      spawnPerSecond: 4
+      durations: [ 6000000 ]
+behaviors:
+  AccountManager:
+    name: AccountManager
+    activityDelay: 2
+    subbehaviors:
+      - name: LoginJPetStoreTask
+        parameters:
+          username: "j2ee"
+          password: "j2ee"
+      - name: ChangeAccountInformationTask
+        repetition: { min: 1, max: 10 }
+        parameters:
+          attribute: ADDRESS2
+          value: "Christian-Albrechts-Platz 4"
+      - name: ViewOrderTask
+        repetition: { min: 1, max: 20 }
+  BrowsingUser:
+    name: BrowsingUser
+    activityDelay: 2
+    subbehaviors:
+      - name: ViewProductTask
+        repetition: { min: 1, max: 5 }
+        parameters:
+          category: CATS
+      - name: ViewProductTask
+        repetition: { min: 1, max: 6 }
+        parameters:
+          category: FISH
+  BuyCartBehavior:
+    name: BuyCartBehavior
+    subbehaviors:
+      - name: LoginJPetStoreTask
+        parameters:
+          username: j2ee
+          password: j2ee
+      - name: CheckoutJPetStoreTask
+  CatLoverBehavior:
+    name: CatLoverBehavior
+    subbehaviors:
+      - name: AddItemsToCartTask
+        repetition: { min: 1, max: 10 }
+        parameters:
+          amount: 9
+          item: FL-DSH-01
+          category: CATS
+      - name: LoginJPetStoreTask
+        parameters:
+          username: j2ee
+          password: j2ee
+      - name: CheckoutJPetStoreTask
+  CatToCartBehavior:
+    name: CatToCartBehavior
+    subbehaviors:
+      - name: AddItemsToCartTask
+        repetition: { min: 1, max: 10 }
+        parameters:
+          amount: 9
+          item: FL-DSH-01
+          category: CATS
+  FishLoverBehavior:
+    name: FishLoverBehavior
+    subbehaviors:
+      - name: AddItemsToCartTask
+        repetition: { min: 1, max: 10 }
+        parameters:
+          amount: 9
+          item: FI-SW-01
+          category: FISH
+      - name: LoginJPetStoreTask
+        parameters:
+          username: j2ee
+          password: j2ee
+      - name: CheckoutJPetStoreTask
+  NewCustomerBehavior:
+    name: NewCustomerBehavior
+    subbehaviors:
+      - name: CreateNewCustomerTask
+        parameters:
+          username: Newone
+          password: new
+      - name: AddItemsToCartTask
+        repetition: { min: 1, max: 1 }
+        parameters:
+          amount: 1
+          item: RP-SN-01
+          category: REPTILES
+      - name: LoginJPetStoreTask
+        parameters:
+          username: Newone
+          password: new
+      - name: CheckoutJPetStoreTask
+  SingleCatBuyerBehavior:
+    name: SingleCatBuyerBehavior
+    subbehaviors:
+      - name: AddItemsToCartTask
+        repetition: { min: 1, max: 1 }
+        parameters:
+          amount: 1
+          item: FL-DSH-01
+          category: CATS
+      - name: LoginJPetStoreTask
+        parameters:
+          username: j2ee
+          password: j2ee
+      - name: CheckoutJPetStoreTask
+  SingleReptileBuyerWorkload:
+    name: SingleReptileBuyerBehavior
+    subbehaviors:
+      - name: AddItemsToCartTask
+        repetition: { min: 1, max: 1 }
+        parameters:
+          amount: 1
+          item: RP-SN-01
+          category: REPTILES
+      - name: LoginJPetStoreTask
+        parameters:
+          username: j2ee
+          password: j2ee
+      - name: CheckoutJPetStoreTask
+
