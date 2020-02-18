@@ -42,6 +42,7 @@ function stopDocker() {
 
 ###################################
 # check parameters
+
 if [ "$1" == "" ] ; then
 	export INTERACTIVE="yes"
 	information "Interactive mode no specialized workload driver"
@@ -109,13 +110,14 @@ if [ "$INTERACTIVE" == "yes" ] ; then
 else
 	information "Running workload driver"
 
-        export SELENIUM_EXPERIMENT_WORKLOADS_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
-        if [ "$WEB_DRIVER" != "" ] ; then
+	export SELENIUM_EXPERIMENT_WORKLOADS_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
+	if [ "$WEB_DRIVER" != "" ] ; then
 	        $WORKLOAD_RUNNER -c $WORKLOAD_PATH -u "$SERVICE_URL" -d "$WEB_DRIVER"
 	else
 	        $WORKLOAD_RUNNER -c $WORKLOAD_PATH -u "$SERVICE_URL"
 	fi
-        sleep 10
+
+	sleep 10
 fi
 
 ###################################
@@ -127,4 +129,3 @@ stopDocker
 information "Done"
 
 # end
-

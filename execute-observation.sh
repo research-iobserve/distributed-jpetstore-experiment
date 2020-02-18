@@ -117,7 +117,7 @@ kieker.monitoring.writer.filesystem.FileWriter.flush=true
 kieker.monitoring.writer.filesystem.FileWriter.bufferSize=81920
 EOF
 
-export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j-debug.cfg
+export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
 
 $COLLECTOR -c collector.config &
 COLLECTOR_PID=$!
@@ -137,5 +137,5 @@ wait ${COLLECTOR_PID}
 rm collector.config
 
 information "Experiment complete."
-
+# end
 # end

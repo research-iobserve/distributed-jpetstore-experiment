@@ -1,11 +1,11 @@
 ################
 # directories
-# data location
+
+# Tools directory
 TOOLS_DIR="$BASE_DIR/../tools"
+
+# data location
 DATA_DIR="$BASE_DIR/data"
-FIXED_DIR="$BASE_DIR/fixed"
-PCM_DIR="$BASE_DIR/pcm"
-DB_DIR="$BASE_DIR/db"
 
 # analysis results
 RESULT_DIR="$BASE_DIR/results"
