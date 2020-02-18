@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Run an JPetStore and collect all events.
+# Requires
+# - JPETSTORE runner script which also runs a workload driver
+# - collector
+
+# Parameter
+# - $1 = workload path, optional
+
 # execute setup
 
 BASE_DIR=$(cd "$(dirname "$0")"; pwd)
@@ -13,16 +21,24 @@ fi
 
 . $BASE_DIR/common-functions.sh
 
-WORKLOAD_CONFIGURATION="$1"
+#############################################
+# common functions
 
+# stopping kube container
+function stopKube() {
+	information "Stopping existing distributed jpetstore instances ..."
+
+	# check all kubernetes services of the experiment are terminated
+	kubectl delete --grace-period=60 service/jpetstore
+	for I in frontend account catalog order ; do
+		kubectl delete --grace-period=120  pods/$I
+	done
+
+	information "done"
+}
+
+###################################
 # check setup
-checkExecutable Collector "$COLLECTOR"
-
-# check workload runner
-checkExecutable "Workload runner" "$WORKLOAD_RUNNER"
-
-# check workload model
-checkFile "Workload configuration" $WORKLOAD_CONFIGURATION
 
 # check for directories
 checkDirectory "Data" $DATA_DIR
@@ -32,67 +48,110 @@ checkDirectory "Fixed data" $FIXED_DIR
 checkDirectory "PCM" $PCM_DIR
 checkDirectory "Kubernetes" $KUBERNETES_DIR
 
-#############################################
-# check if no leftovers are running
+checkExecutable Collector "${COLLECTOR}"
+checkExecutable "Workload runner" "$WORKLOAD_RUNNER"
+checkFile log-configuration $BASE_DIR/log4j.cfg
+
+###################################
+# check parameters
+
+if [ "$1" == "" ] ; then
+	export INTERACTIVE="yes"
+	export EXPERIMENT_ID="interactive"
+	information "Interactive mode no specialized workload driver"
+else
+	export INTERACTIVE="no"
+	checkFile workload "$1"
+	WORKLOAD_CONFIGURATION="$1"
+	export EXPERIMENT_ID=`basename "$WORKLOAD_CONFIGURATION" | sed 's/\.yaml$//g'`
+	information "Automatic mode, workload driver is ${WORKLOAD_PATH}"
+fi
+
+export COLLECTOR_DATA_DIR="${DATA_DIR}/${EXPERIMENT_ID}"
+
+###################################
+# main script
+
+information "--------------------------------------------------------------------"
+information "$EXPERIMENT_ID $WORKLOAD_CONFIGURATION"
+information "--------------------------------------------------------------------"
+
+###################################
+# stopping services
+
+information "Cleanup"
+
+# stop kubernetes
+stopKube
 
 # stop collector
-COLLECTOR_PID=`ps auxw | grep coll | awk '{ print $2 }'`
-kill -TERM $COLLECTOR_PID
+information "Stopping collector ..."
 
-# remove old data
-rm -rf $DATA_DIR/*
+COLLECTOR_PID=`ps auxw | grep "/collector" | grep -v grep | awk '{ print $2 }' | head -1`
 
-# check all kubernetes services of the experiment are terminated
-kubectl delete service/jpetstore
-for I in frontend account catalog order ; do
-	kubectl delete pods/$I
+while  [ "${COLLECTOR_PID}" != "" ] ; do
+	COLLECTOR_PID=`ps auxw | grep "/collector" | grep -v grep | awk '{ print $2 }' | head -1`
+	echo "stopping ${COLLECTOR_PID}"
+	kill -TERM $COLLECTOR_PID
 done
 
-# killall phantomjs from selenium
-killall -9 phantomjs
+information "done"
+echo ""
 
-#####################################################################
-# starting
+# remove old data
+information "Cleaning data"
+rm -rf $COLLECTOR_DATA_DIR/*
+
+mkdir -p $COLLECTOR_DATA_DIR
+
+###################################
+# start experiment
+
+information "Deploying experiment..."
+
+##
+# collector
+
+information "Start collector"
 
 # configure collector
 cat << EOF > collector.config
 # common
-kieker.monitoring.name=$TYPE
+kieker.monitoring.name=${EXPERIMENT_ID}
 kieker.monitoring.hostname=
 kieker.monitoring.metadata=true
 
 # TCP collector
-iobserve.service.reader=org.iobserve.service.source.MultipleConnectionTcpCompositeStage
-org.iobserve.service.source.MultipleConnectionTcpCompositeStage.port=9876
-org.iobserve.service.source.MultipleConnectionTcpCompositeStage.capacity=8192
+kieker.tools.source=kieker.tools.source.MultipleConnectionTcpSourceCompositeStage
+kieker.tools.source.MultipleConnectionTcpSourceCompositeStage.port=9876
+kieker.tools.source.MultipleConnectionTcpSourceCompositeStage.capacity=8192
 
 # dump stage
 kieker.monitoring.writer=kieker.monitoring.writer.filesystem.FileWriter
-kieker.monitoring.writer.filesystem.FileWriter.customStoragePath=$DATA_DIR
+kieker.monitoring.writer.filesystem.FileWriter.customStoragePath=$COLLECTOR_DATA_DIR/
 kieker.monitoring.writer.filesystem.FileWriter.charsetName=UTF-8
 kieker.monitoring.writer.filesystem.FileWriter.maxEntriesInFile=25000
 kieker.monitoring.writer.filesystem.FileWriter.maxLogSize=-1
 kieker.monitoring.writer.filesystem.FileWriter.maxLogFiles=-1
 kieker.monitoring.writer.filesystem.FileWriter.mapFileHandler=kieker.monitoring.writer.filesystem.TextMapFileHandler
 kieker.monitoring.writer.filesystem.TextMapFileHandler.flush=true
-kieker.monitoring.writer.filesystem.TextMapFileHandler.compression=kieker.monitoring.writer.filesystem.compression.NoneCompressionFilter
+kieker.monitoring.writer.filesystem.TextMapFileHandler.compression=kieker.monitoring.writer.compression.NoneCompressionFilter
 kieker.monitoring.writer.filesystem.FileWriter.logFilePoolHandler=kieker.monitoring.writer.filesystem.RotatingLogFilePoolHandler
 kieker.monitoring.writer.filesystem.FileWriter.logStreamHandler=kieker.monitoring.writer.filesystem.TextLogStreamHandler
 kieker.monitoring.writer.filesystem.FileWriter.flush=true
-kieker.monitoring.writer.filesystem.FileWriter.bufferSize=8192
+kieker.monitoring.writer.filesystem.FileWriter.bufferSize=81920
 EOF
 
-echo ">>>>>>>>>>> start analysis/collector"
+export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
 
-#export COLLECTOR_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
 $COLLECTOR -c collector.config &
 COLLECTOR_PID=$!
 
 sleep 10
 
-# jpetstore
+# run jpetstore
 
-echo ">>>>>>>>>>> start jpetstore"
+information "Start jpetstore"
 
 cat $KUBERNETES_DIR/jpetstore.yaml | sed "s/%LOGGER%/$LOGGER/g" > start.yaml
 cat $KUBERNETES_DIR/usa.yaml | sed "s/%LOGGER%/$LOGGER/g" > additional.yaml
@@ -108,46 +167,38 @@ done
 
 SERVICE_URL="http://$FRONTEND:8080/jpetstore-frontend"
 
-echo "Servie URL $SERVICE_URL"
+information "Service URL $SERVICE_URL"
 
-while ! curl -sSf $SERVICE_URL ; do
+while ! curl -sSf $SERVICE_URL 2> /dev/null > /dev/null ; do
+	echo "waiting for service coming up..."
 	sleep 1
 done
 
-echo ">>>>>>>>>>> start workload"
+information "Running workload driver"
 
 export SELENIUM_EXPERIMENT_WORKLOADS_OPTS=-Dlog4j.configuration=file:///$BASE_DIR/log4j.cfg
-$WORKLOAD_RUNNER -c $WORKLOAD_CONFIGURATION -u "$SERVICE_URL" -d "$PHANTOM_JS" &
-WORKLOAD_RUNNER_PID=$!
+if [ "$WEB_DRIVER" != "" ] ; then
+        $WORKLOAD_RUNNER -c $WORKLOAD_PATH -u "$SERVICE_URL" -d "$WEB_DRIVER"
+else
+        $WORKLOAD_RUNNER -c $WORKLOAD_PATH -u "$SERVICE_URL"
+fi
 
 sleep 30
 
-echo "Migrating service"
+information "Migrating service"
 
 kubectl replace -f additional.yaml --force
 
 wait $WORKLOAD_RUNNER_PID
 
-echo "<<<<<<<<<<< term workload"
-
-# shutdown phantomjs
-killall -9 phantomjs
-
 # shutdown jpetstore
-echo "<<<<<<<<<<< term jpetstore"
-
-kubectl delete --grace-period=60 service/jpetstore
-for I in frontend account catalog order ; do
-	kubectl delete --grace-period=120 pods/$I
-done
+stopKube()
 
 sleep 120
 
-# shutdown analysis/collector
-echo "<<<<<<<<<<< term analysis"
-
 kill -TERM ${COLLECTOR_PID}
+
 rm collector.config
 
-echo "Done."
+information "Experiment complete."
 # end
